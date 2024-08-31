@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="jumbotron title">
+    CLOTHING
+  </div>
+  <mat-card class="cardclass" *ngFor="let prod of products; let i = index">
+    <div class="image-container">
+      <img [src]= prod.productImage[0] alt="..." class="mat-img" (click)="productClicked(prod._id)">
+      <div class="overlay">
+        <div class="text" (click)="productClicked(prod._id)">Quick View</div>
+      </div>
+    </div>
+
+    <mat-card-title class="mat-card-title" (click)="productClicked(prod._id)">{{prod.name}}</mat-card-title>
+    <mat-label>{{prod.price | currency:'PKR'}}</mat-label>
+  </mat-card>
+
+</div>
+<!--
+<div style="float: left;" *ngFor="let prod of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]; let i = index">
+  <mat-card class="cardclass">
+    <img src= "../../../../assets/images/i1.jpg" alt="..." class="mat-img">
+
+    <mat-card-title><a>prod.name</a></mat-card-title>
+    <mat-card-subtitle><a>prod.category</a></mat-card-subtitle>
+
+    <mat-card-content>
+      <p>prod.offer</p>
+      <hr>
+      <mat-label>prod.price | currency:'PKR'</mat-label>
+      <span class="float-right ">
+        <i class="fa fa-shopping-cart" (click)="addToCart(prod._id)"></i>
+      </span>
+    </mat-card-content>
+
+     <button (click)="addToCart(prod._id)" mat-raised-button>Add</button>
+    <button mat-flat-button color="primary">Details</button> -->
+    <!--<mat-card-footer>
+      Copyright @2020-OSB
+    </mat-card-footer>
+  </mat-card>
+
+</div> -->

@@ -1,0 +1,143 @@
+<div>
+  <div class="banner">
+    <div class="banner-overlay">
+    <label class="banner-label">
+      <h1 class="banner-heading">OSB</h1>
+      <p class="banner-lead">This Is Online Shopping Bazaar.</p>
+      <button class="banner-button" (click)="scrollToview()">SHOP NOW</button>
+    </label>
+  </div>
+  <img class="banner-img" [src]=images[1].src>
+
+    <!-- <ng-container *ngFor="let slide of images; let i=index">
+      <ng-template carouselSlide>
+        <img [src]="slide">
+        <label><h1 class="heading">Online Shopping Bazaar</h1></label>
+        <p class="lead"></p>
+      </ng-template>
+    </ng-container>-->
+   </div>
+
+<!-- <div class="banner">
+  <div class="banner-overlay">
+  <label class="banner-label">
+    <h1 class="banner-heading">Online Shopping Bazaar</h1>
+    <p class="banner-lead">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi, porro saepe voluptatibus cumque, harum iusto rem nobis et illo cupiditate aut cum qui fugit, sint perspiciatis est ipsa error vitae.</p>
+    <button class="banner-button" (click)="scrollToview()">SHOP NOW</button>
+  </label>
+</div>
+<owl-carousel-o [options]="customBannerOptions">
+  <ng-container *ngFor="let bannerslides of images">
+    <ng-template carouselSlide>
+      {{bannerslides.src}}
+      <img src = {{bannerslides.src}}>
+    </ng-template>
+  </ng-container> -->
+
+  <!-- <ng-container *ngFor="let slide of images; let i=index">
+    <ng-template carouselSlide>
+      <img [src]="slide">
+      <label><h1 class="heading">Online Shopping Bazaar</h1></label>
+      <p class="lead"></p>
+    </ng-template>
+  </ng-container>
+ </owl-carousel-o> -->
+
+<!-- <mat-form-field appearance="fill">
+  <mat-label>select Category </mat-label>
+  <mat-select (selectionChange) = "departmentSelected($event.value)" placeholder="select Category">
+    <mat-option class="empty-select"></mat-option>
+    <mat-option style="color: black;" *ngFor="let department of departments" [value]="department.value">{{department.category}}</mat-option>
+  </mat-select>
+</mat-form-field> -->
+
+<div class="categoryContainer">
+  <div class="categoryItem" *ngFor="let cat of category; let i = index" (click)="categoryClicked(i)">
+    <img [src]= cat.categoryImage alt="..." class="cat-img"/>
+    <p class="cat-title">{{cat.title}}</p>
+    <div class="category-overlay">
+      <div class="category-overlay-text">{{ cat.title }}</div>
+    </div>
+  </div>
+</div>
+
+<div id="mainContainer" class="container">
+  <div *ngIf= 'loading' class="loader">
+    <mat-spinner class="spinner-position"  mode="indeterminate"></mat-spinner>
+  </div>
+  <div class="product-section">
+  <div class="title">
+    ------ Top Deals ------
+  </div>
+  <div class="items">
+    <owl-carousel-o [options]="customItemsOptions">
+      <ng-container *ngFor="let prod of topDeals; let i = index">
+        <ng-template carouselSlide >
+            <mat-card class="cardclass">
+              <div class="image-container">
+                <img [src]= prod.productImage[0] alt="..." class="mat-img" (click)="productClicked(prod._id)">
+                <div class="overlay">
+                  <div class="text" (click)="productClicked(prod._id)">Quick View</div>
+                </div>
+              </div>
+
+              <mat-card-title class="mat-card-title" (click)="productClicked(prod._id)">{{prod.name}}</mat-card-title>
+              <mat-label>{{prod.price | currency:'PKR'}}</mat-label>
+            </mat-card>
+          </ng-template>
+
+        </ng-container>
+      </owl-carousel-o>
+    </div>
+
+  </div>
+
+  <div class="product-section">
+    <div class="title">
+      ------ Top Selling ------
+    </div>
+    <div class="items">
+    <owl-carousel-o [options]="customItemsOptions">
+      <ng-container class="item"  *ngFor="let prod of topSelling; let i = index">
+        <ng-template  class="item" carouselSlide >
+            <mat-card class="cardclass">
+              <div class="image-container">
+                <img [src]= prod.productImage[0] alt="..." class="mat-img" (click)="productClicked(prod._id)">
+                <div class="overlay">
+                  <div class="text" (click)="productClicked(prod._id)">Quick View</div>
+                </div>
+              </div>
+              <mat-card-title class="mat-card-title" (click)="productClicked(prod._id)">{{prod.name}}</mat-card-title>
+              <mat-label>{{prod.price | currency:'PKR'}}</mat-label>
+            </mat-card>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </div>
+  </div>
+  <div class="product-section">
+    <div class="title">
+      ------ Top Products ------
+    </div>
+    <div class="items">
+      <owl-carousel-o [options]="customItemsOptions">
+        <ng-container *ngFor="let prod of topProducts; let i = index">
+          <ng-template carouselSlide >
+            <mat-card class="cardclass">
+              <div class="image-container">
+                <img [src]= prod.productImage[0] alt="..." class="mat-img" (click)="productClicked(prod._id)">
+                <div class="overlay">
+                  <div class="text" (click)="productClicked(prod._id)">Quick View</div>
+                </div>
+              </div>
+
+              <mat-card-title class="mat-card-title" (click)="productClicked(prod._id)">{{prod.name}}</mat-card-title>
+                <mat-label>{{prod.price | currency:'PKR'}}</mat-label>
+              </mat-card>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+    </div>
+      </div>
+    </div>

@@ -1,0 +1,231 @@
+
+.popup-view {
+  z-index: 2;
+  background: rgba(255,255,255,0.3);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-card {
+  position: absolute;
+  display: flex;
+  width: 800px;
+  height: auto;
+  margin: 20px;
+}
+
+.popup-view .popup-card .product-img {
+  z-index: 2;
+  background: #1d212b;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 450px;
+  height: 350px;
+  transform: translateY(25px);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.popup-view .popup-card .product-img img {
+  z-index: 2;
+  position: relative;
+  width: 400px;
+  height: 300px;
+  left: -50px;
+}
+.popup-view .popup-card .close-btn {
+  z-index: 3;
+  color: rgba(216,18,18);
+  position: absolute;
+  right: 0;
+  font-size: 20px;
+  margin: 20px;
+  outline: none;
+  cursor: pointer;
+}
+
+.info {
+  z-index: 2;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.info h2 {
+  font: 40px;
+  line-height: 20px;
+  margin: 10px;
+}
+
+.info h2 span {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.info p {
+  font-size: 15px;
+  margin: 10px;
+}
+
+.info .price {
+  font-size: 40px;
+  font-weight: 600;
+  margin: 10px;
+
+}
+
+.info .add-to-cart-btn {
+  color: #fff;
+  background: tomato;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin: 10px auto;
+  padding: 10px 50px;
+  outline: none;
+  border-radius: 20px;
+}
+.info .add-to-cart-btn:hover {
+  background-color: red;
+  cursor: pointer;
+}
+
+
+@media (max-width: 900px) {
+  .popup-view {
+    margin: 10px 10px 10px 10px;
+    overflow: scroll;
+  }
+  .popup-card {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    overflow: scroll;
+  }
+
+  .popup-view .popup-card .product-img {
+    z-index: 3;
+    width: 100%;
+    height: 30%;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .popup-view .popup-card .product-img img {
+    left: initial;
+    transform: translateY(0px);
+    height: 100%;
+    max-width: 100%;
+  }
+
+  .popup-card .info {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .info h2 {
+    font-size: 25px;
+  }
+
+  .info h2 span {
+    font-size: 10px;
+  }
+  .info p {
+    font-size: 13px;
+  }
+  .info .price {
+    margin: 0px;
+    font-size: 20px;
+  }
+  .info .add-to-cart-btn {
+    margin: 5px auto;
+    padding: 5px 40px;
+    font-size: 14px;
+  }
+
+  .popup-view .popup-card .close-btn {
+    z-index: 4;
+    position: absolute;
+    color: rgb(216, 18, 18);
+  }
+}
+
+@media (max-width: 480px){
+  .popup-view {
+    margin: 10px 10px 10px 10px;
+    overflow: scroll;
+  }
+  .popup-card {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: scroll;
+  }
+
+  .popup-view .popup-card .product-img {
+    z-index: 3;
+    width: 100%;
+    height: 30%;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .popup-view .popup-card .product-img img {
+    left: initial;
+    transform: translateY(0px);
+    height: 100%;
+    max-width: 100%;
+  }
+
+  .popup-card .info {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .info h2 {
+    font-size: 25px;
+  }
+
+  .info h2 span {
+    font-size: 10px;
+  }
+  .info p {
+    font-size: 13px;
+  }
+  .info .price {
+    margin: 0px;
+    font-size: 20px;
+  }
+  .info .add-to-cart-btn {
+    margin: 5px auto;
+    padding: 5px 40px;
+    font-size: 14px;
+  }
+
+  .popup-view .popup-card .close-btn {
+    z-index: 4;
+    position: absolute;
+    color: rgb(216,18,18);
+  }
+}
+

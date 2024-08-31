@@ -1,0 +1,71 @@
+<!-- <form (submit)="login()">
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+    </div>
+    <button type="submit" class="btn btn-default">Sign in!</button>
+  </form> -->
+
+  <div class="login-page">
+    <mat-card class="mat-elevation-z12">
+      <mat-card-title style="text-align:center;">SignIn</mat-card-title>
+  <mat-card-content>
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" novalidate>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Username"
+          required
+          name="username"
+          ngModel
+          #username="ngModel">
+          <mat-error *ngIf="username.invalid">Username is required</mat-error>
+        <mat-icon matSuffix>username</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Password"
+          type="password"
+          required
+          minlength="6"
+          name="password"
+          ngModel
+          #password="ngModel">
+          <mat-error
+            *ngIf="password.errors && password.errors.required">
+            Password is required
+          </mat-error>
+          <mat-error
+            *ngIf="password.errors && password.errors.minlength">
+            Password must be of length 6
+          </mat-error>
+        <mat-icon matSuffix>lock</mat-icon>
+      </mat-form-field>
+      <a [routerLink]= "['/user/reset']">Forget Password</a>
+      <button
+        mat-raised-button
+        class="login-button">
+        Sign In
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        class="login-button">
+        Login with Google
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="login-button">
+        Login with Facebook
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
+</div>

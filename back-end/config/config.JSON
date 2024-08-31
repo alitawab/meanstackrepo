@@ -1,0 +1,10 @@
+{
+    "development": {
+        "PORT": 3000,
+        "MONGODB_URI": "mongodb://localhost:27017/mean"
+    },
+    "production": {
+        "PORT": 80,
+        "MONGODB_URI": "mongodb://ali:ali123@ds133378.mlab.com:33378/mean"    
+    }
+}

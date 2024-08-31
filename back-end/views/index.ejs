@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ADMIN - Online Shopping Bazaar</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+  * {
+    box-sizing: border-box;  
+  }  
+ 
+  /* Style the tab */
+  .tab {
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 30%;
+    height: 300px;
+  }
+
+  /* Style the buttons that are used to open the tab content */
+  .tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+
+  /* Create an active/current "tab button" class */
+  .tab button.active {
+    background-color: #ccc;
+  }
+
+  /* Style the tab content */
+  .tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 70%;
+    border-left: none;
+    height: 700px;
+    display: none;
+  }
+  .avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 2px;
+  }
+  .product-image{
+    vertical-align: middle;
+    width: 70px;
+    height: 60px;
+  }
+
+  .tablinks {
+    text-transform: uppercase;
+  }
+  
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+    </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="tab">
+          <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" class="avatar"/>
+          <button class="tablinks" onclick="openTab(event, 'Overview')">
+            Product List
+          </button>
+          <button class="tablinks" onclick="openTab(event, 'ADD')">
+            Add Product
+          </button>
+          <button class="tablinks" onclick="openTab(event, 'Tokyo')">
+            View Orders
+          </button>
+          <button class="tablinks" onclick="openTab(event, 'Category')">
+            Add Category
+          </button>
+        </div>
+        
+        <div id="Overview" class="tabcontent">
+          <h3>Overview</h3>
+          <div>
+          <select class="selectpicker" data-style="btn-info" name="selectpicker">
+            <optgroup label="Select Table">
+                <option value="clothing">Clothing</option>
+                <option value="bedding">Bedding</option>
+                <option value="accessories">Accessories</option>
+                <option value="blanket">Blanket</option>
+                <option value="toys">Toys</option>
+            </optgroup>
+        </select>
+        <button id="catbutton" value="Submit">Submit</button>
+      </div>
+          <table id="tableId" class="table table-sm">
+            <thead class="thead-dark">
+              <tr>
+                <th class="col-md-2">Product Name</th>
+                <th class="col-md-2">Product Offer</th>
+                <th class="col-md-2">Prodcuct Price</th>
+                <th class="col-md-2">Product Image</th>
+                <th class="col-md-2">Operation</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% for(var i = 0; i < products.length; i++) {%>                
+              <tr>
+                <td><%=products[i].name%></td>
+                <td><%=products[i].offer%></td>
+                <td><%=products[i].price%></td>
+                <td><img class="product-image" src='/product/<%=products[i].productImage[0].image%>'></td>
+                <td>
+                  <a id="editButton" onclick="openModal('<%=products[i]._id%>')" class="btn btn-raised btn-primary">Edit</a>
+                  <a class="btn btn-raised btn-danger" href="/admin/delete/<%=products[i]._id %>">Delete</a>
+                </td>
+              </tr>
+              <%}%>
+            </tbody>
+          </table>
+          </div>
+          <div id="ADD" class="tabcontent">
+            <div class="product">
+              <h2 class="page-header">ADD PRODUCT</h2>
+              <form action="/admin/upload" method="POST" enctype="multipart/form-data" id="product-form">
+                <div class="form-group">
+                  <input placeholder="Product Name" type="text" name="name" class="form-control" required/>
+                </div>
+                <div class="form-group">
+                  <input placeholder="Product Category" type="text" name="category" class="form-control" required/>
+                </div>
+                <div class="form-group">
+                  <input placeholder="Product Price" type="text" name="price" class="form-control" required/>
+                </div>
+                <div class="form-group">
+                  <input placeholder="Quantity" type="text" name="qty" class="form-control" required/>
+                </div>
+                <div class="form-group">
+                  <input placeholder="Special Offers" type="text" name="offer" class="form-control" required/>
+                </div>
+                <div class="form-group">
+                  <label>Product Image</label>
+                  <input type="file" name="productImage" multiple required/>
+                </div>
+                <input type="submit" value="Add" class="btn btn-primary"/>
+                <!-- <i class="fa fa-spinner fa-spin fa-fw" *ngIf=""></i> -->
+              </form>
+            </div>
+          </div>
+          
+          <div id="Tokyo" class="tabcontent">
+            <h3>Orders</h3>
+            <table id="orderTableId" class="order-table table-sm">
+              <thead class="thead-dark">
+                <tr>
+                  <th class="col-md-2">Order Name</th>
+                  <th class="col-md-2">Order Offer</th>
+                  <th class="col-md-2">Order Price</th>
+                  <th class="col-md-2">Order Image</th>
+                  <th class="col-md-2">Order</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var i = 0; i < orders.length; i++) {%>                
+                  <tr>
+                    <td><%=orders[i].contactInfo.name%></td>
+                    <td><%=orders[i].deliveryLocation.latitude%></td>
+                    <td><%=orders[i].orderedItems.totalPrice%></td>
+                  </tr>
+                  <%}%>
+                </tbody>
+              </table>
+            </div>
+
+            <div id="Category" class="tabcontent">
+              <div class="category">
+                <h2 class="page-header">ADD Category</h2>
+                <form action="/admin/uploadcat" method="POST" enctype="multipart/form-data" id="category-form">
+                  <div class="form-group">
+                    <input placeholder="Category Name" type="text" name="title" class="form-control" required/>
+                  </div>
+                  <div class="form-group">
+                    <label>Category Image</label>
+                    <input type="file" name="categoryImage" required/>
+                  </div>
+                  <input type="submit" value="Add" class="btn btn-primary"/>
+                  <!-- <i class="fa fa-spinner fa-spin fa-fw" *ngIf=""></i> -->
+                </form>
+              </div>
+            </div>
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+              
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Update Product</p>
+    <form action="/admin/edit" method="POST">
+        <div class="form-group">
+            <input placeholder="Product ID" type="text" name="update_product_id" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input placeholder="Enter New Product Name" type="text" name="update_product_name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input placeholder="Enter New Product Category" type="text" name="update_product_category" class="form-control" />
+        </div>
+        <div class="form-group">
+          <input placeholder="Enter New Product Price" type="text" name="update_product_price" class="form-control" />
+        </div>
+        <div class="form-group">
+          <input placeholder="Enter New Quantity" type="text" name="update_product_qty" class="form-control" />
+        </div>
+        <div class="form-group">
+          <input placeholder="Enter New Special Offers" type="text" name="update_product_offer" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Enter New Product Image</label>
+          <input type="file" name="update_product_productImage" multiple/>
+        </div>
+        <input type="submit" value="Update" class="btn btn-raised btn-primary"/>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+
+<script>
+$(document).ready(function(){
+  $(document).on('click', '#catbutton', function(){
+    var value = $('.selectpicker').val();
+    var product_data;
+    var body = [];
+    $.ajax({
+      method:'POST',
+      data: {'value': value},
+      url:'/admin/catselected'
+    })
+    .done(function(data) {
+      console.log(data);
+      product_data = data;
+      product_data.forEach(function(element) {
+        var tr = $('<tr/>');
+        tr.append($('<td/>').html(element.name));
+        tr.append($('<td/>').html(element.offer));
+        tr.append($('<td/>').html(element.price));
+        tr.append($('<td/>').html('<img class="product-image" src=/product/'+ element.productImage[0].image +'>'));
+        tr.append($('<td/>').html('<a id="editButton" class="btn btn-raised btn-primary" data-selector="'+ element._id +'">Edit</a> <a id="delete-button" href="/admin/delete/'+ element._id +'" data-selector="'+ element._id +'" class="btn btn-raised btn-danger">Delete</a>'));
+        tr.append($('<td/>').html());
+        body.push(tr);
+      });
+      $('table').find('tbody').html(body);
+  })
+  });
+
+  $(document).on('click', '#editButton', function(){ 
+    var id = $(this).data('selector');
+    var productId = document.getElementsByName("update_product_id");
+    // var productName = document.getElementsByName("update-product-name");
+    // var productCategory = document.getElementsByName("update-product-category");
+    // var productPrice = document.getElementsByName("update-product-price");
+    // var productQty = document.getElementsByName("update-product-qty");
+    // var productOffer = document.getElementsByName("update-product-offer");
+    productId[0].value=id;
+    // productName[0].value=oldProduct.name;
+    // productCategory[0].value=oldProduct.category;
+    // productPrice[0].value=oldProduct.price;
+    // productQty[0].value=oldProduct.qty;
+    // productOffer[0].value=oldProduct.offer;
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("editButton");
+    var span = document.getElementsByClassName("close")[0];
+    modal.style.display = "block";
+    span.onclick = function() 
+    {modal.style.display = "none";}
+    window.onclick = function(event)
+    {
+      if (event.target == modal)
+      {
+        modal.style.display = "none";
+      }
+    }
+  });
+
+  $(document).on('click', '#deleteButton', function(){
+    var id = $(this).data('selector');
+    var body = [];
+    $.ajax({
+      method:'POST',
+      data: {'id': id},
+      url:'/admin/delete/'
+    })
+    .done(function(data) {
+      console.log(data);
+      // product_data = data.products;
+      // product_data.forEach(function(element) {
+      //   var tr = $('<tr/>');
+      //   tr.append($('<td/>').html(element.name));
+      //   tr.append($('<td/>').html(element.offer));
+      //   tr.append($('<td/>').html(element.price));
+      //   tr.append($('<td/>').html('<img class="product-image" src=/product/'+ element.productImage[0].image +'>'));
+      //   tr.append($('<td/>').html('<a id="editButton" class="btn btn-raised btn-primary" data-selector="'+ element._id +'">Edit</a> <a id="delete-button" href="/admin/delete/'+ element._id +'" data-selector="'+ element._id +'" class="btn btn-raised btn-danger">Delete</a>'));
+      //   tr.append($('<td/>').html());
+      //   body.push(tr);
+      });
+      // $('table').find('tbody').html(body);
+    });
+
+    $(document).on('click', '#tabbutton', function(){
+      alert("hello");
+    });
+
+});
+
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// function optionselected() { 
+// }
+// function openModal(id) { 
+// }
+    </script>
+    </html>

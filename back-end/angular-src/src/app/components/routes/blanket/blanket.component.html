@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="jumbotron title">
+    BLANKET
+  </div>
+  <mat-card class="cardclass" *ngFor="let prod of products; let i = index">
+    <div class="image-container">
+      <img [src]= prod.productImage[0] alt="..." class="mat-img" (click)="productClicked(prod._id)">
+      <div class="overlay">
+        <div class="text" (click)="productClicked(prod._id)">Quick View</div>
+      </div>
+    </div>
+
+    <mat-card-title class="mat-card-title" (click)="productClicked(prod._id)">{{prod.name}}</mat-card-title>
+    <mat-label>{{prod.price | currency:'PKR'}}</mat-label>
+  </mat-card>
+
+</div>

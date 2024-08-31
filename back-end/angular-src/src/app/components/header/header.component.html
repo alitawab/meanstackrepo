@@ -1,0 +1,107 @@
+<!-- <div *ngIf= 'sharedService.isLoading | async' class="loader-container">
+<mat-progress-bar  mode="indeterminate"></mat-progress-bar>
+</div>
+<nav>
+  <ul>
+    <li class="logo">
+      <a [routerLink]="['']">Online Shopping Bazaar</a>
+    </li>
+
+    <li class="btn">
+      <span class="fa fa-home" [routerLink]="['']"></span>
+    </li>
+
+    <li class="categories">
+      <ul>
+        <li *ngFor="let depart of departments">
+          <a (click)="departmentSelected(depart.value)">{{depart.category}}</a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="search-icon">
+      <input type="search" placeholder="Search..." (keyup)="showResults($event)" [(ngModel)]="searchValue" name="searchValue">
+      <label class="icon">
+        <span class="fa fa-search"></span>
+      </label>
+      <li class="dropdown">
+      <ul class="dropdown-menu" *ngIf='showDropDown'>
+        <li *ngFor="let r of results" (click)="productSelected(r._id)">
+          <a>{{r.name}}</a>
+        </li>
+      </ul>
+    </li>
+
+
+    <li class="cart">
+      <a [routerLink]="['/cart']"><i class="fa fa-shopping-cart"></i><span class="badge">{{cartCount.totalQuantity}}</span></a>
+    </li> -->
+
+    <!-- <a mat-button routerLink="['/user/signin']">Login</a> -->
+
+    <!-- <li class="dropdown">
+      <a data-toggle="dropdown" role="button"><i class="fa fa-user"></i><span class="fa fa-caret-down"></span></a>
+      <ul class="dropdown-menu">
+        <li *ngIf="!userAuth.isLoggedIn()"><a [routerLink]="['/user/signup']">Sign Up</a></li>
+        <li *ngIf="!userAuth.isLoggedIn()"><a [routerLink]="['/user/signin']">Sign In</a></li>
+        <li *ngIf="userAuth.isLoggedIn()"><a [routerLink]="['/user/profile']">{{ userAuth.getUserDetails()?.username }}</a></li>
+        <li *ngIf="userAuth.isLoggedIn()"><a (click)="userAuth.logout()">Logout</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav> -->
+
+
+<header>
+  <div class="container">
+    <input type="checkbox" id="check">
+    <div class="logo-container" [routerLink]="['']">
+      <img class="logo-img" src="../../../assets/images/logo.png">
+      <h3 class="logo">Online Shopping <span>Bazaar</span></h3>
+    </div>
+
+    <div class="nav-btn">
+      <div class="nav-links">
+        <ul>
+          <li class="nav-link" *ngFor="let depart of departments">
+            <a (click)="departmentSelected(depart.value)">{{depart.category}}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="log-sign" style="--i: .4s">
+        <a *ngIf="!userAuth.isLoggedIn()" [routerLink]="['/user/signin']" class="btn transparent">Log In</a>
+        <a *ngIf="!userAuth.isLoggedIn()" [routerLink]="['/user/signup']" class="btn solid">Sign Up</a>
+        <a *ngIf="userAuth.isLoggedIn()" [routerLink]="['/user/profile']" class="btn solid">{{ userAuth.getUserDetails()?.username }}</a>
+        <a [routerLink]="['/cart']"><i class="cart fa fa-shopping-cart"><span matBadge="{{cartCount}}"></span></i></a>
+      </div>
+    </div>
+
+    <div class="hamburger-menu-container">
+      <div class="hamburger-menu">
+        <div></div>
+      </div>
+    </div>
+  </div>
+
+</header>
+
+<!-- <div class="basic-container">
+  <img src="/assets/images/b3.jpg">
+  <label><h1 class="heading">Online Shopping Bazaar</h1></label>
+  <p class="lead"></p>
+</div> -->
+
+
+
+<!--
+<div fxLayout = "column" fxFlex = "80">
+
+<div fxLayout = "row">
+  <img  mat-card-image src="/assets/images/b3.jpg" alt="Free image">
+
+</div>
+
+
+
+</div> -->
